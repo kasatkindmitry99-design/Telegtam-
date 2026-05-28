@@ -1,22 +1,53 @@
-Telegram CRM Bot
+# Telegram CRM Bot
+CRM Telegram бот для обработки заявок пользователей.
 
-Функции:
+## Функции
+
 - FSM анкета
-- админ панель
-- поиск заявок
-- статусы
-- рассылка
-- async SQLite
-- pagination
+- Админ панель
+- Статусы заявок
+- Поиск заявок
+- Рассылка
+- Pagination
+- Async SQLite
+- HTML formatting
+- Admin filter
 
-Telegram CRM Bot
+## Stack
 
-Функции:
-- FSM анкета
-- админ панель
-- поиск заявок
-- статусы
-- рассылка
-- async SQLite
-- pagination
-- статистика
+- Python
+- Aiogram 3
+- SQLite
+- Aiosqlite
+- Asyncio
+
+## Установка
+
+pip install -r requirements.txt
+
+## Запуск
+py main.py
+
+## Screenshots
+
+### Main Menu
+
+![Main Menu](screenshots/menu.png)
+
+---
+
+### Admin Panel
+
+![Admin Panel](screenshots/admin_menu.png)
+
+---
+
+### User Form
+
+![User Form](screenshots/form.png)
+
+---
+
+### Statistics
+
+![Statistics](screenshots/stats.png)
