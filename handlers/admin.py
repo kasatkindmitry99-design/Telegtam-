@@ -56,7 +56,7 @@ async def show_user_card(event, users, index=0, filter_type="all"):
         return
 
     user = users[index]
-    user_id, name, phone, status, created_at, telegram_id = user
+    user_id, telegram_id, name, phone, status, created_at = user
 
     keyboard = get_user_keyboard(user_id, index, len(users), filter_type)
 
