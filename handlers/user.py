@@ -15,11 +15,11 @@ import logging
 router = Router()
 
 @router.message(F.text == "❌ Отмена")
-async def cancel_handler(message: Message,state: FSMContext):
+async def cancel_handler(message: Message, state: FSMContext):
 
     await state.clear()
     await message.answer("<b>❌ Действие отменено</b>", reply_markup=ReplyKeyboardRemove())
-    await message.answer("<b>Главное меню</b>",reply_markup=main_menu)
+    await message.answer("<b>Главное меню</b>", reply_markup=main_menu)
 
 @router.message(CommandStart())
 async def start(message: Message):
