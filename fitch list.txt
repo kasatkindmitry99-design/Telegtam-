@@ -1,0 +1,155 @@
+✅ Что уже готово
+
+У тебя есть:
+
+FSM анкета
+FSM админка
+FSM поиск
+FSM рассылка
+preview confirm
+pagination
+статусы заявок
+фильтры
+удаление
+поиск
+статистика
+contact button
+HTML formatting
+AdminFilter
+async database (aiosqlite)
+async architecture
+telegram_id
+admin panel
+callback navigation
+broadcast system
+
+Это уже mini CRM system.
+
+🔥 Что осталось по roadmap
+
+Теперь идут уже production-level вещи.
+
+1️⃣ Redis FSM storage
+
+Сейчас FSM хранится:
+
+в памяти
+
+Если бот перезапустится:
+
+состояния пропадут
+
+Redis решает это.
+
+2️⃣ SQLAlchemy ORM
+
+Сейчас у тебя:
+
+raw SQL
+
+SQLAlchemy даст:
+
+models
+ORM
+migrations
+нормальную архитектуру
+3️⃣ PostgreSQL
+
+SQLite хорош для начала.
+
+Но production обычно:
+
+PostgreSQL
+4️⃣ Логирование
+
+Сейчас ошибки в консоли.
+
+Нужно:
+
+logging в файл
+error logger
+admin notifications
+5️⃣ Config через .env
+
+Сейчас скорее всего:
+
+TOKEN = "..."
+
+Нужно:
+
+.env
+
+через python-dotenv.
+
+6️⃣ Деплой
+
+Очень важный этап.
+
+Например:
+
+Railway
+Render
+VPS Linux
+7️⃣ Docker
+
+Контейнеризация бота.
+
+8️⃣ Webhook
+
+Вместо polling.
+
+Production способ.
+
+9️⃣ Anti-spam / Rate limit
+
+Например:
+
+1 заявка в минуту
+cooldown
+🔟 Media support
+
+Сейчас только текст.
+
+Можно:
+
+фото
+документы
+voice
+media groups
+1️⃣1️⃣ Excel / PDF export
+
+Админ может скачать:
+
+заявки
+отчёты
+1️⃣2️⃣ Pagination 2.0
+
+Сейчас:
+
+next/prev
+
+Можно:
+
+jump pages
+inline counters
+fast navigation
+1️⃣3️⃣ User кабинет
+
+Пользователь сможет:
+
+смотреть статус
+редактировать заявку
+отменять заявку
+1️⃣4️⃣ Notifications system
+
+Например:
+
+новая заявка → админу
+статус изменён → пользователю
+1️⃣5️⃣ Analytics
+
+Графики:
+
+новые заявки
+конверсия
+активность

@@ -1,2 +1,11 @@
-# Telegtam-
-Telegtam бот принимает заявки автоматически(CRM внутри Telegram)
+Telegram CRM Bot
+
+Функции:
+- FSM анкета
+- админ панель
+- поиск заявок
+- статусы
+- рассылка
+- async SQLite
+- pagination
+- статистика
