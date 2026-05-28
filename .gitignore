@@ -1,5 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.env
+database.db
 *.py[codz]
 *$py.class
 
