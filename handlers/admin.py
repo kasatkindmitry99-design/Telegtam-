@@ -317,15 +317,28 @@ async def delete_user_handler(callback: CallbackQuery):
     try:
 
         await delete_user(user_id)
+
         users = await get_users()
 
-        await show_user_card(callback, users)
-        await callback.answer()
+        if index >= len(users):
 
-        await callback.answer("✅ Заявка удалена")
+            index = len(users) - 1
+
+        await show_user_card(
+            callback,
+            users,
+            index
+        )
+
+        await callback.answer(
+            "✅ Заявка удалена"
+        )
 
     except Exception as e:
 
         logging.error(e)
 
-        await callback.answer("Ошибка удаления", show_alert=True)
+        await callback.answer(
+            "Ошибка удаления",
+            show_alert=True
+        )
