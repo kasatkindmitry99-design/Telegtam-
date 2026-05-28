@@ -2,6 +2,7 @@
 __pycache__/
 .env
 database.db
+venv/
 *.py[codz]
 *$py.class
 
