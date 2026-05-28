@@ -19,15 +19,15 @@ def get_user_keyboard(user_id, index, total, filter_type):
 
     if index > 0:
 
-        buttons.append(InlineKeyboardButton(text="⬅️",callback_data=f"prev_{index}_{filter_type}"))
+        buttons.append(InlineKeyboardButton(text="⬅️", callback_data=f"prev_{index}_{filter_type}"))
 
-    buttons.append(InlineKeyboardButton(text="❌ Удалить",callback_data=f"del_{user_id}_{index}"))
-    buttons.append(InlineKeyboardButton(text="🟢 В работу",callback_data=f"work_{user_id}_{index}"))
-    buttons.append(InlineKeyboardButton(text="🔴 Закрыть",callback_data=f"close_{user_id}_{index}"))
+    buttons.append(InlineKeyboardButton(text="❌ Удалить", callback_data=f"del_{user_id}_{index}"))
+    buttons.append(InlineKeyboardButton(text="🟢 В работу", callback_data=f"work_{user_id}_{index}"))
+    buttons.append(InlineKeyboardButton(text="🔴 Закрыть", callback_data=f"close_{user_id}_{index}"))
 
     if index < total - 1:
 
-        buttons.append(InlineKeyboardButton(text="➡️",callback_data=f"next_{index}_{filter_type}"))
+        buttons.append(InlineKeyboardButton(text="➡️", callback_data=f"next_{index}_{filter_type}"))
 
     keyboard.append(buttons)
 
@@ -35,11 +35,11 @@ def get_user_keyboard(user_id, index, total, filter_type):
 
 def get_status_text(status):
 
-    statuses = {"new": "🟡 Новая","work": "🟢 В работе","closed": "🔴 Закрыта"}
+    statuses = {"new": "🟡 Новая", "work": "🟢 В работе", "closed": "🔴 Закрыта"}
 
     return statuses.get(status, status)
 
-async def show_user_card(event,users,index=0,filter_type="all"):
+async def show_user_card(event, users, index=0, filter_type="all"):
 
     if not users:
 
@@ -47,18 +47,18 @@ async def show_user_card(event,users,index=0,filter_type="all"):
 
         if isinstance(event, CallbackQuery):
 
-            await event.message.answer(text,reply_markup=admin_keyboard)
+            await event.message.answer(text, reply_markup=admin_keyboard)
 
         else:
 
-            await event.answer(text,reply_markup=admin_keyboard)
+            await event.answer(text, reply_markup=admin_keyboard)
 
         return
 
     user = users[index]
     user_id, name, phone, status, created_at, telegram_id = user
 
-    keyboard = get_user_keyboard(user_id,index,len(users),filter_type)
+    keyboard = get_user_keyboard(user_id, index, len(users), filter_type)
 
     text = (
         f"<b>📋 Заявка {index + 1}/{len(users)}</b>\n\n"
@@ -71,42 +71,42 @@ async def show_user_card(event,users,index=0,filter_type="all"):
 
     if isinstance(event, CallbackQuery):
 
-        await event.message.edit_text(text,reply_markup=keyboard)
+        await event.message.edit_text(text, reply_markup=keyboard)
 
     else:
 
-        await event.answer(text,reply_markup=keyboard)
+        await event.answer(text, reply_markup=keyboard)
 
-@router.callback_query(F.data == "show_all",AdminFilter())
+@router.callback_query(F.data == "show_all", AdminFilter())
 async def show_all_users(callback: CallbackQuery):
 
     users = await get_users()
 
-    await show_user_card(callback,users)
+    await show_user_card(callback, users)
     await callback.answer()
 
-@router.callback_query(F.data == "show_new",AdminFilter())
+@router.callback_query(F.data == "show_new", AdminFilter())
 async def show_new_users(callback: CallbackQuery):
 
     users = await get_users_by_status("new")
 
-    await show_user_card(callback,users)
+    await show_user_card(callback, users)
 
-@router.callback_query(F.data == "show_work",AdminFilter())
+@router.callback_query(F.data == "show_work", AdminFilter())
 async def show_work_users(callback: CallbackQuery):
 
     users = await get_users_by_status("work")
 
-    await show_user_card(callback,users)
+    await show_user_card(callback, users)
 
-@router.callback_query(F.data == "show_closed",AdminFilter())
+@router.callback_query(F.data == "show_closed", AdminFilter())
 async def show_closed_users(callback: CallbackQuery):
 
     users = await get_users_by_status("closed")
 
-    await show_user_card(callback,users)
+    await show_user_card(callback, users)
 
-@router.callback_query(F.data.startswith("next_"),AdminFilter())
+@router.callback_query(F.data.startswith("next_"), AdminFilter())
 async def next_user(callback: CallbackQuery):
 
     data = callback.data.split("_")
@@ -125,10 +125,10 @@ async def next_user(callback: CallbackQuery):
 
         index = 0
 
-    await show_user_card(callback,users,index)
+    await show_user_card(callback, users, index)
     await callback.answer()
 
-@router.callback_query(F.data.startswith("prev_"),AdminFilter())
+@router.callback_query(F.data.startswith("prev_"), AdminFilter())
 async def prev_user(callback: CallbackQuery):
 
     data = callback.data.split("_")
@@ -147,10 +147,10 @@ async def prev_user(callback: CallbackQuery):
 
         index = len(users) - 1
 
-    await show_user_card(callback,users,index)
+    await show_user_card(callback, users, index)
     await callback.answer()
 
-@router.callback_query(F.data == "admin_stats",AdminFilter())
+@router.callback_query(F.data == "admin_stats", AdminFilter())
 async def admin_stats(callback: CallbackQuery):
 
     stats = await get_stats()
@@ -165,8 +165,8 @@ async def admin_stats(callback: CallbackQuery):
 
     await callback.answer()
 
-@router.callback_query(F.data == "admin_find",AdminFilter())
-async def admin_find(callback: CallbackQuery,state: FSMContext):
+@router.callback_query(F.data == "admin_find", AdminFilter())
+async def admin_find(callback: CallbackQuery, state: FSMContext):
 
     await state.set_state(AdminStates.find_user)
     await callback.message.answer("<b>🔎 Введите имя или телефон</b>")
@@ -180,8 +180,8 @@ async def admin_panel(message: Message):
         reply_markup=admin_keyboard
     )
 
-@router.callback_query(F.data == "admin_send",AdminFilter())
-async def admin_send(callback: CallbackQuery,state: FSMContext):
+@router.callback_query(F.data == "admin_send", AdminFilter())
+async def admin_send(callback: CallbackQuery, state: FSMContext):
 
     await state.set_state(AdminStates.broadcast)
     await callback.message.answer("<b>📢 Введите текст рассылки</b>")
@@ -193,30 +193,30 @@ async def show_users(callback: CallbackQuery):
     users = await get_users()
     await show_user_card(callback,users)
 
-@router.callback_query(F.data.startswith("work_"),AdminFilter())
+@router.callback_query(F.data.startswith("work_"), AdminFilter())
 async def set_work_status(callback: CallbackQuery):
 
     data = callback.data.split("_")
     user_id = int(data[1])
     index = int(data[2])
 
-    cursor.execute("UPDATE users SET status = ? WHERE id = ?",("work", user_id))
+    cursor.execute("UPDATE users SET status = ? WHERE id = ?", ("work", user_id))
     conn.commit()
 
     await callback.answer("🟢 Статус обновлен")
 
-@router.callback_query(F.data.startswith("close_"),AdminFilter())
+@router.callback_query(F.data.startswith("close_"), AdminFilter())
 async def set_closed_status(callback: CallbackQuery):
 
     data = callback.data.split("_")
     user_id = int(data[1])
 
-    cursor.execute("UPDATE users SET status = ? WHERE id = ?",("closed", user_id))
+    cursor.execute("UPDATE users SET status = ? WHERE id = ?", ("closed", user_id))
     conn.commit()
 
     await callback.answer("🔴 Заявка закрыта")
 
-@router.message(AdminStates.find_user,AdminFilter())
+@router.message(AdminStates.find_user, AdminFilter())
 async def process_find_user(message: Message, state: FSMContext):
 
     search = message.text
@@ -251,8 +251,8 @@ async def process_find_user(message: Message, state: FSMContext):
     await state.clear()
 
 
-@router.message(AdminStates.broadcast,AdminFilter())
-async def process_broadcast(message: Message,state: FSMContext):
+@router.message(AdminStates.broadcast, AdminFilter())
+async def process_broadcast(message: Message, state: FSMContext):
 
     text = message.text
 
@@ -264,8 +264,8 @@ async def process_broadcast(message: Message,state: FSMContext):
         reply_markup=broadcast_keyboard
     )
 
-@router.callback_query(F.data == "confirm_send",AdminFilter())
-async def confirm_send(callback: CallbackQuery,state: FSMContext,bot: Bot):
+@router.callback_query(F.data == "confirm_send", AdminFilter())
+async def confirm_send(callback: CallbackQuery, state: FSMContext, bot: Bot):
 
     data = await state.get_data()
     text = data.get("broadcast_text")
@@ -284,7 +284,7 @@ async def confirm_send(callback: CallbackQuery,state: FSMContext,bot: Bot):
 
         try:
 
-            await bot.send_message(telegram_id,text)
+            await bot.send_message(telegram_id, text)
 
             success += 1
 
@@ -300,8 +300,8 @@ async def confirm_send(callback: CallbackQuery,state: FSMContext,bot: Bot):
     await state.clear()
     await callback.answer()
 
-@router.callback_query(F.data == "cancel_send",AdminFilter())
-async def cancel_send(callback: CallbackQuery,state: FSMContext):
+@router.callback_query(F.data == "cancel_send", AdminFilter())
+async def cancel_send(callback: CallbackQuery, state: FSMContext):
 
     await state.clear()
     await callback.message.answer("<b>❌ Рассылка отменена</b>")
@@ -319,7 +319,7 @@ async def delete_user_handler(callback: CallbackQuery):
         await delete_user(user_id)
         users = await get_users()
 
-        await show_user_card(callback,users)
+        await show_user_card(callback, users)
         await callback.answer()
 
         await callback.answer("✅ Заявка удалена")
