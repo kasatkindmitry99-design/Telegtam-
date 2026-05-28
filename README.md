@@ -1,12 +1,14 @@
 # Telegram CRM Bot
 CRM Telegram бот для обработки заявок пользователей.
 
-Функции:
+## Функции
+
 - FSM анкета
-- админ панель
-- поиск заявок
-- статусы
-- рассылка
-- async SQLite
-- pagination
-- статистика
+- Админ панель
+- Статусы заявок
+- Поиск заявок
+- Рассылка
+- Pagination
+- Async SQLite
+- HTML formatting
+- Admin filter
