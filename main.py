@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
-from config import TOKEN
+from config import BOT_TOKEN
 from handlers.user import router as user_router
 from handlers.admin import router as admin_router
 from aiogram.enums import ParseMode
@@ -11,7 +11,7 @@ from database.db import create_db
 
 logging.basicConfig(level=logging.INFO,format="%(asctime)s - %(levelname)s - %(message)s")
 
-bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
 dp = Dispatcher()
 
