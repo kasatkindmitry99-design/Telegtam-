@@ -1,7 +1,5 @@
 import logging
-
 from aiogram.filters import BaseFilter
-
 from config import ADMINS
 
 class AdminFilter(BaseFilter):
